@@ -7,7 +7,7 @@ export default function Contact() {
 
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-black">
-            Contact Us
+            Contact Me
           </h1>
 
          
