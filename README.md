@@ -27,7 +27,9 @@ It allows users to convert long and complicated URLs into short, easy-to-share l
 
 ## 📸 Preview
 
-> Add screenshots of your Shortify website here.
+<p align="center">
+  <img src="./public/Screenshot.png" alt="Shortify Home Page" width="800"/>
+</p>
 
 ```text
 Coming Soon...
