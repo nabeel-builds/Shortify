@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Link from 'next/link'
+import ActiveUsersBadge from '../components/ActiveUsersBadge'
 
 const Shorten = () => {
 
@@ -39,11 +40,13 @@ const Shorten = () => {
     }
 
     return (
-        <div className='mx-auto max-w-lg bg-purple-200 my-16 p-8 rounded-lg flex flex-col gap-4'>
+        <div className='mx-auto max-w-lg bg-purple-200 my-16 p-8 rounded-lg flex flex-col gap-4 '>
+        <ActiveUsersBadge/>
 
             <h1 className='font-bold text-2xl'>
                 Generate your short URLs
             </h1>
+
 
             <div className='flex flex-col gap-3'>
 
