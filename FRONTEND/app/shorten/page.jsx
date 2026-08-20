@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import Link from 'next/link'
-import ActiveUsersBadge from '../components/ActiveUsersBadge'
+import { toast } from "react-toastify";
 
 const Shorten = () => {
 
@@ -9,39 +9,50 @@ const Shorten = () => {
     const [shorturl, setShorturl] = useState("")
     const [generated, setGenerated] = useState("")
 
-    const generateUrl = () => {
 
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+    const generateUrl = async () => {
+        try {
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/url/shorten`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        url: url,
+                        shorturl: shorturl,
+                    }),
+                }
+            );
 
-        const raw = JSON.stringify({
-            "url": url,
-            "shorturl": shorturl
-        });
+            const result = await response.json();
 
-        const requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: raw,
-            redirect: "follow"
-        };
+            if (!response.ok) {
+                toast.error(result.message || "Something went wrong");
+                return;
+            }
 
-        fetch("/api/generate", requestOptions)
-            .then((response) => response.json())
-            .then((result) => {
-                setUrl("")
-                setShorturl("")
-                setGenerated(`${process.env.NEXT_PUBLIC_HOST}/${shorturl}`)
-                alert(result.message)
+            setGenerated(`${process.env.NEXT_PUBLIC_API_URL}/${shorturl}`);
 
-            })
-            .catch((error) => console.error(error));
+            setUrl("");
+            setShorturl("");
 
-    }
+            toast.success("URL Generated Successfully");
+
+       
+
+          
+
+        } catch (error) {
+            console.error(error);
+            alert("Unable to connect to server");
+        }
+    };
 
     return (
         <div className='mx-auto max-w-lg bg-purple-200 my-16 p-8 rounded-lg flex flex-col gap-4 '>
-        <ActiveUsersBadge/>
+
 
             <h1 className='font-bold text-2xl'>
                 Generate your short URLs

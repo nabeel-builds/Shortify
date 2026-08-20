@@ -12,7 +12,7 @@ const Navbar = () => {
       {/* Logo */}
       <Link href="/">
         <button className="logo font-bold text-2xl cursor-pointer">
-          Shortify
+          Shortivo
         </button>
       </Link>
 
