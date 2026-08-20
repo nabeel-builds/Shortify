@@ -14,12 +14,23 @@ const app = express();
 
 connectDB();
 
-app.use(cors());
+const allowOrigins = [
+  "https://shortivo.vercel.app/",
+  "http://localhost:3000",
+]
+
+app.use(cors({
+  origin: allowOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("URL Shortener Backend is running");
 });
+
 
 app.use("/api/url", urlRoutes);
 app.use("/", redirectRoutes);
